@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,9 +18,11 @@ public class App
 {
 
     static Scanner Entrada_teclado = new Scanner(System.in);
+    static ArrayList<coche> ArrayCoches = new ArrayList<coche>();
 
     public static void main( String[] args )
     {
+        LeerFichero();
         Menu();
     }
 
@@ -30,7 +33,7 @@ public class App
 
             System.out.println("************************************************************************");
             System.out.println("1.- Añadir una agenda                                                  *");
-            System.out.println("2.- Ver Agendas                                                        *");
+            System.out.println("2.- Ver array                                                          *");
             System.out.println("3.- Editar Agenda                                                      *");
             System.out.println("4.- Eliminar Agenda                                                    *");
             System.out.println("5.- Salir                                                              *");
@@ -45,6 +48,12 @@ public class App
                         break;
 
                     case 2:
+                            for (int i = 0; i < ArrayCoches.size(); i++){
+                                System.out.println("Id: "+ArrayCoches.get(i).id);
+                                System.out.println("Marca: "+ArrayCoches.get(i).marca);
+                                System.out.println("Modelo: "+ArrayCoches.get(i).modelo);
+                                System.out.println("Cilindrada: "+ArrayCoches.get(i).cilindrada);
+                            }
                         break;
 
                     case 3:
@@ -80,6 +89,12 @@ public class App
     public static void LeerFichero(){
 
         File file = new File("Concesionario.xml");
+        ArrayList<coche> ArrayCoches = new ArrayList<coche>();
+
+        String marca;
+        String modelo;
+        int cilindrada = 0;
+        String id;
 
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -94,16 +109,19 @@ public class App
                 if(nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
 
-                    System.out.println("\nCoche id: " + eElement.getAttribute("id"));
-                    System.out.println("Marca: "
-                            + eElement.getElementsByTagName("marca").item(0).getTextContent());
-                    System.out.println("Modelo: "
-                            + eElement.getElementsByTagName("modelo").item(0).getTextContent());
-                    System.out.println("Cilindrada: "
-                            + eElement.getElementsByTagName("cilindrada").item(0).getTextContent());
+                    marca = eElement.getElementsByTagName("marca").item(0).getTextContent();
+                    id = eElement.getAttribute("id");
+                    modelo = eElement.getElementsByTagName("modelo").item(0).getTextContent();
+                    cilindrada =Integer.parseInt(eElement.getElementsByTagName("cilindrada").item(0).getTextContent());
+
+                    coche cocheAux = new coche( marca, modelo, cilindrada, id);
+
+                    ArrayCoches.add(cocheAux);
+
+
                 }
             }
-            
+
         } catch(Exception e) {
             e.printStackTrace();
         }
