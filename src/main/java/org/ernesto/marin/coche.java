@@ -11,7 +11,7 @@ public class coche {
 
     String marca;
     String modelo;
-    int cilindrada;
+    String cilindrada;
     String id;
 
 
@@ -19,7 +19,7 @@ public class coche {
 
     }
 
-    public coche(String marca, String modelo, int cilindrada, String id) {
+    public coche(String marca, String modelo, String cilindrada, String id) {
         this.marca = marca;
         this.modelo = modelo;
         this.cilindrada = cilindrada;
@@ -42,11 +42,11 @@ public class coche {
         this.modelo = modelo;
     }
 
-    public int getCilindrada() {
+    public String getCilindrada() {
         return cilindrada;
     }
 
-    public void setCilindrada(int cilindrada) {
+    public void setCilindrada(String cilindrada) {
         this.cilindrada = cilindrada;
     }
 

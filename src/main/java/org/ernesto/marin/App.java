@@ -89,11 +89,10 @@ public class App
     public static void LeerFichero(){
 
         File file = new File("Concesionario.xml");
-        ArrayList<coche> ArrayCoches = new ArrayList<coche>();
 
         String marca;
         String modelo;
-        int cilindrada = 0;
+        String cilindrada;
         String id;
 
         try {
@@ -112,7 +111,7 @@ public class App
                     marca = eElement.getElementsByTagName("marca").item(0).getTextContent();
                     id = eElement.getAttribute("id");
                     modelo = eElement.getElementsByTagName("modelo").item(0).getTextContent();
-                    cilindrada =Integer.parseInt(eElement.getElementsByTagName("cilindrada").item(0).getTextContent());
+                    cilindrada = eElement.getElementsByTagName("cilindrada").item(0).getTextContent();
 
                     coche cocheAux = new coche( marca, modelo, cilindrada, id);
 
